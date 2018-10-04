@@ -7,15 +7,16 @@ package com.zobrezero.app;
 /**
  * La clase suma hereda la estructura de la clase Operacion,
  * también agrega el valor de la operación
+ * s
  * @author Carlos
  */
 public class Suma extends Operacion
 {
-	// Declara una variable para el resultado de la suma
+    // Declara una variable para el resultado de la suma
     double suma;
 
     /**
-     * Constructor del objeto, tiene dos argumentos que son los números a sumar
+     * Constructor de la clase, tiene dos argumentos que son los números a sumar
      *
      * @param      n1    Un número a sumar
      * @param      n2    Otro número a decir

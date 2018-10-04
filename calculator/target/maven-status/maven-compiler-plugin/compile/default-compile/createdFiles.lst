@@ -1,6 +1,3 @@
 com/zobrezero/app/Operacion.class
-com/zobrezero/app/Suma.class
 com/zobrezero/app/Division.class
-com/zobrezero/app/Resta.class
-com/zobrezero/app/Calculadora.class
 com/zobrezero/app/Multiplicacion.class

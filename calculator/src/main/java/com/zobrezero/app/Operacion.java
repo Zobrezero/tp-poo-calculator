@@ -35,7 +35,7 @@ public class Operacion
     }
 
     /**
-     * Método que se encarga de mostrar el resultado de la operación de manera leíble por humanos
+     * Método que se encarga de mostrar el resultado de la operación de manera legible por humanos
      */
     public void mostrarResultado()
     {
