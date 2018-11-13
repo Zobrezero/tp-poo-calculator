@@ -1,0 +1,26 @@
+Listado de funciones tomadas a partid de lo visto en la página http://api.pilas-engine.com.ar/pilasengine.html
+
+pilasengine.fps.FPS(fps)
+	actualizar()
+	obtener_cuadros_por_segundo()
+
+pilasengine.prueba_habilidades
+
+// es para ver cuando se guarda un archivo, creo
+pilasengine.watcher.Watcher(aFile=None, callback=None, checkEvery=2)
+	cambiar_archivo_a_observar(aFile)
+	prevenir_reinicio()
+
+// es la pantalla en sí
+pilasengine.widget
+	activar_borrosidad()
+	alternar_pantalla_completa()
+	alternar_pausa()
+	avanza_solo_un_cuadro()
+	continuar()
+	keyPressEvent(*args, **kwargs)
+	keyReleaseEvent(*args, **kwargs)
+	mousePressEvent(*args, **kwargs)
+	mouseReleaseEvent(*args, **kwargs)
+	obtener_area()
+	pausar()

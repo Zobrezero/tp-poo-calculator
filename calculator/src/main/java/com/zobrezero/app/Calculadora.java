@@ -17,7 +17,7 @@ public class Calculadora
     {
         // Declara dos números
         double numero1 = 10;
-        double numero2 = 0;
+        double numero2 = 5;
 
 
         // Instancia la clase Suma y en el constructor pasa los números flotantes numero1 y numero2
