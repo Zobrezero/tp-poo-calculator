@@ -12,56 +12,39 @@ class ADNBicho:
 
 	def __setVida(self):
 		print "holis"
-		# return True
 
-	# def __setSatisfecho():
-	# 	return True
+	def __setSatisfecho():
+		return None
 
-	# def __setDescansado():
-	# 	return True
+	def __setDescansado():
+		return None
 
-	# def __setEntretencion():
-	# 	return True
+	def __setEntretencion():
+		return None
 
-	# def __setNivel():
-	# 	return True
+	def __setNivel():
+		return None
 
-	# def __setMultiplicador():
-	# 	return True
+	def __setMultiplicador():
+		return None
 
 	def getVida(self):
 		print "holis"
-		# return True
 
-	# def isVivo():
-	# 	return True
+	def isVivo():
+		return None
 
-	# def tomarPosicion():
-	# 	return True
+	def tomarPosicion():
+		return None
 
-	# def vivir():
-	# 	return True
+	def vivir():
+		return None
 
-	# def comer():
-	# 	return True
+	def comer():
+		return None
 
-	# def dormir():
-	# 	return True
+	def dormir():
+		return None
 
-	# def jugar():
-	# 	return True
-
-
-class Bicho(ADNBicho):
-	text = "asda"
-
-	def __init__(self):
-		ADNBicho.__init__(self)
-
-	def holis(self):
-		print "holahola"
-		ADNBicho.getVida(self)
-
-
-uno = Bicho()
-uno.holis()
+	def jugar():
+		return None
