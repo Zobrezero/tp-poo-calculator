@@ -1,6 +1,7 @@
 from ADNBicho import ADNBicho
-from assets import pilasengine
-from assets import pilas
+# from assets import pilasengine
+# from assets import pilas
+import pilasengine
 
 class Bicho(ADNBicho, pilasengine.actores.Actor):
 	text = "asda"
@@ -11,9 +12,3 @@ class Bicho(ADNBicho, pilasengine.actores.Actor):
 	def holis(self):
 		print "holahola"
 		ADNBicho.getVida(self)
-
-
-
-uno = Bicho()
-uno.holis()
-uno.decir("holisisisi")
