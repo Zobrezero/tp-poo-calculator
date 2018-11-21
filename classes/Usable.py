@@ -1,9 +1,8 @@
 import pilasengine
-#import Bicho
 
 pilas = pilasengine.iniciar()
 
-class ADNBicho:
+class ADNBicho(object):
 	__vida = 0
 	__satisfecho = 0
 	__descansado = 0
@@ -57,24 +56,21 @@ class ADNBicho:
 class Bicho(pilasengine.actores.Actor, ADNBicho):
 	text = "asda"
 
-	def __init__(self):
-		ADNBicho.__init__(self)
-
 	def iniciar(self):
 		self.imagen = "Agregar.png"
 
 	def holis(self):
 		print("hola3")
-		ADNBicho.getVida(self)
 
+uno = Bicho(pilas)
 
-#uno = Bicho()
-#uno.holis()
-#uno.decir("holisisisi")
+# llama al método heredado del actor
+uno.decir(u"holis!")
 
+# llama al método heredado del ADNBicho
+uno.getVida()
 
-class Alien(pilasengine.actores.Actor):
-	
-
+# llama al método propio de Bicho
+uno.holis()
 
 pilas.ejecutar()

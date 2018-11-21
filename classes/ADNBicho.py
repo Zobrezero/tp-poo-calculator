@@ -10,8 +10,8 @@ class ADNBicho:
 	def __init__(self):
 		__vida = 3
 
-	def __setVida(self):
-		print "holis"
+	def __setVida(self, valor):
+		__vida += valor
 
 	def __setSatisfecho():
 		return None
