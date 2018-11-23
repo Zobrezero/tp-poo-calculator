@@ -3,18 +3,26 @@ import pilasengine
 pilas = pilasengine.iniciar()
 
 class ADNBicho(object):
-	__vida = 0
-	__satisfecho = 0
-	__descansado = 0
-	__entretencion = 0
+	__vida = 100
+
+	__descansado   = 50
+	__entretencion = 50
+	__satisfecho   = 50
+
+	__suma_vida = 25
+
+	__multiplicador_vida         = 1
+	__multiplicador_descansado   = 1
+	__multiplicador_entretencion = 1
+	__multiplicador_satisfecho   = 1
+
 	__nivel = 0
-	__multiplicador = 0
 
 	def __init__(self):
 		__vida = 3
 
-	def __setVida(self):
-		print("holis1")
+	def __setVida(self, vida):
+		self.__vida = self.vida + vida
 
 	def __setSatisfecho(self):
 		return None
@@ -32,7 +40,7 @@ class ADNBicho(object):
 		return None
 
 	def getVida(self):
-		print("holis2")
+		return None
 
 	def isVivo(self):
 		return None
@@ -53,24 +61,37 @@ class ADNBicho(object):
 		return None
 
 
-class Bicho(pilasengine.actores.Actor, ADNBicho):
-	text = "asda"
+class BichoRojo(pilasengine.actores.Actor, ADNBicho):
+	def __init__(self):
+		return None
 
 	def iniciar(self):
-		self.imagen = "Agregar.png"
+		self.imagen = "rojo.png"
 
-	def holis(self):
-		print("hola3")
+	def comer(self):
+		self.__setVida(__suma_vida * __multiplicador_vida)
 
-uno = Bicho(pilas)
 
-# llama al método heredado del actor
-uno.decir(u"holis!")
+class BichoVerde(pilasengine.actores.Actor, ADNBicho):
+	__suma_vida = 20
+	def iniciar(self):
+		self.imagen = "verde.png"
 
-# llama al método heredado del ADNBicho
-uno.getVida()
 
-# llama al método propio de Bicho
-uno.holis()
+class BichoAzul(pilasengine.actores.Actor, ADNBicho):
+	def iniciar(self):
+		self.imagen = "azul.png"
+
+bicho_verde = BichoVerde(pilas)
+bicho_verde.decir(u"holis!")
+bicho_verde.getVida()
+
+bicho_rojo = BichoRojo(pilas)
+bicho_rojo.decir(u"holis!")
+bicho_rojo.getVida()
+
+bicho_azul = BichoAzul(pilas)
+bicho_azul.decir(u"holis!")
+bicho_azul.getVida()
 
 pilas.ejecutar()
