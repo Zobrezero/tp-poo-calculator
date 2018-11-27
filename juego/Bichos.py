@@ -1,3 +1,4 @@
+import pilasengine
 
 class ADNBicho(object):
 	__vida = 100
@@ -45,9 +46,6 @@ class ADNBicho(object):
 	def tomarPosicion(self):
 		return None
 
-	def vivir(self):
-		return None
-
 	def comer(self):
 		return None
 
@@ -58,18 +56,41 @@ class ADNBicho(object):
 		return None
 
 class BichoRojo(pilasengine.actores.Actor, ADNBicho):
+	#def __init__(self):
+	#	ADNBicho.__init__()
+
 	def iniciar(self):
 		self.imagen = "rojo.png"
 
-	def comer(self):
-		self.__setVida(__suma_vida * __multiplicador_vida)
+	def vivir(self):
+		return True #if self.__vida > 0  else False
+
+	def saludar(self):
+		print("Hola wachin")
 
 class BichoVerde(pilasengine.actores.Actor, ADNBicho):
-	__suma_vida = 20
+	#def __init__(self):
+	#	ADNBicho.__init__()
+
 	def iniciar(self):
 		self.imagen = "verde.png"
 
+	def vivir(self):
+		return True #if self.__vida > 0  else False
+
+	def saludar(self):
+		print("Hola wachin")
 
 class BichoAzul(pilasengine.actores.Actor, ADNBicho):
+	#def __init__(self):
+	#	ADNBicho.__init__()
+
 	def iniciar(self):
 		self.imagen = "azul.png"
+
+	def vivir(self):
+		return True #if self.__vida > 0  else False
+
+	def saludar(self):
+		print("Hola wachin")
+
