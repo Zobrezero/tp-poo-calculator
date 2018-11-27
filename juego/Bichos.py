@@ -1,6 +1,3 @@
-import pilasengine
-
-pilas = pilasengine.iniciar()
 
 class ADNBicho(object):
 	__vida = 100
@@ -60,17 +57,12 @@ class ADNBicho(object):
 	def jugar(self):
 		return None
 
-
 class BichoRojo(pilasengine.actores.Actor, ADNBicho):
-	def __init__(self):
-		return None
-
 	def iniciar(self):
 		self.imagen = "rojo.png"
 
 	def comer(self):
 		self.__setVida(__suma_vida * __multiplicador_vida)
-
 
 class BichoVerde(pilasengine.actores.Actor, ADNBicho):
 	__suma_vida = 20
@@ -81,17 +73,3 @@ class BichoVerde(pilasengine.actores.Actor, ADNBicho):
 class BichoAzul(pilasengine.actores.Actor, ADNBicho):
 	def iniciar(self):
 		self.imagen = "azul.png"
-
-bicho_verde = BichoVerde(pilas)
-bicho_verde.decir(u"holis!")
-bicho_verde.getVida()
-
-bicho_rojo = BichoRojo(pilas)
-bicho_rojo.decir(u"holis!")
-bicho_rojo.getVida()
-
-bicho_azul = BichoAzul(pilas)
-bicho_azul.decir(u"holis!")
-bicho_azul.getVida()
-
-pilas.ejecutar()

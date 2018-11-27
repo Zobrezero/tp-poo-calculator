@@ -1,50 +1,57 @@
-class ADNBicho:
-	"""A simple example class"""
-	__vida = 0
-	__satisfecho = 0
-	__descansado = 0
-	__entretencion = 0
+class ADNBicho(object):
+	__vida = 100
+
+	__descansado   = 50
+	__entretencion = 50
+	__satisfecho   = 50
+
+	__suma_vida = 25
+
+	__multiplicador_vida         = 1
+	__multiplicador_descansado   = 1
+	__multiplicador_entretencion = 1
+	__multiplicador_satisfecho   = 1
+
 	__nivel = 0
-	__multiplicador = 0
 
 	def __init__(self):
 		__vida = 3
 
-	def __setVida(self, valor):
-		__vida += valor
+	def __setVida(self, vida):
+		self.__vida = self.vida + vida
 
-	def __setSatisfecho():
+	def __setSatisfecho(self):
 		return None
 
-	def __setDescansado():
+	def __setDescansado(self):
 		return None
 
-	def __setEntretencion():
+	def __setEntretencion(self):
 		return None
 
-	def __setNivel():
+	def __setNivel(self):
 		return None
 
-	def __setMultiplicador():
+	def __setMultiplicador(self):
 		return None
 
 	def getVida(self):
-		print "holis"
-
-	def isVivo():
 		return None
 
-	def tomarPosicion():
+	def isVivo(self):
 		return None
 
-	def vivir():
+	def tomarPosicion(self):
 		return None
 
-	def comer():
+	def vivir(self):
 		return None
 
-	def dormir():
+	def comer(self):
 		return None
 
-	def jugar():
+	def dormir(self):
+		return None
+
+	def jugar(self):
 		return None
