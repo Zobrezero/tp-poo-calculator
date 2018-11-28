@@ -25,7 +25,7 @@ class ADNBicho(object):
 	__nivel = 0
 
 	def __init__(self):
-		__vida = 3
+		self.__vida = 0
 
 	def __setVida(self, vida):
 		self.__vida = self.vida + vida
@@ -49,7 +49,7 @@ class ADNBicho(object):
 		return True if self.__vida > 0  else False
 
 	def getVida(self):
-		return None
+		return self.__vida
 
 	def isVivo(self):
 		return None
@@ -67,37 +67,49 @@ class ADNBicho(object):
 		return None
 
 class BichoRojo(pilasengine.actores.Actor, ADNBicho):
-	#def __init__(self):
-	#	ADNBicho.__init__()
+	def vivir(self):
+		self.__barra.progreso = self.getVida()
 
 	def iniciar(self):
-		self.imagen = "rojo.png"
+		self.imagen = "Bicho1.png"
+		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
+
+	def posicionarBarra(self):
+		self.__barra.x = self.x
+		self.__barra.y = self.y - 50
 
 	def saludar(self):
 		print("Hola wachin")
 
 class BichoVerde(pilasengine.actores.Actor, ADNBicho):
-	#def __init__(self):
-	#	ADNBicho.__init__()
+	def vivir(self):
+		self.__barra.progreso = self.getVida()
 
 	def iniciar(self):
-		self.imagen = "verde.png"
+		self.imagen = "Bicho2.png"
+		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
+
+	def posicionarBarra(self):
+		self.__barra.x = self.x
+		self.__barra.y = self.y - 50
 
 	def saludar(self):
 		print("Hola wachin")
 
 class BichoAzul(pilasengine.actores.Actor, ADNBicho):
-	#def __init__(self):
-	#	ADNBicho.__init__()
+	def vivir(self):
+		self.__barra.progreso = self.getVida()
 
 	def iniciar(self):
-		self.imagen = "azul.png"
+		self.imagen = "Bicho3.png"
+		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
+
+	def posicionarBarra(self):
+		self.__barra.x = self.x
+		self.__barra.y = self.y - 50
 
 	def saludar(self):
 		print("Hola wachin")
-
-
-
 
 bichos = []
 
@@ -109,13 +121,16 @@ lastPositionX = -275
 lastPositionY = 200
 
 def finDelJuego():
-	print("fin del juego")
+	pilas.tareas.eliminar_todas()
 
 def restarPosicion():
 	global lastPositionX
 	global lastPositionY
 	lastPositionX = lastPositionX + 100
 	#lastPositionY = lastPositionY - 50
+	if (len(bichos) % 6 == 0):
+		lastPositionY = lastPositionY -100
+		lastPositionX = -285
 
 def bichoRandom():
 	r = random.randint(1,3)
@@ -130,6 +145,7 @@ def generarBicho():
 	aux = bichoRandom()
 	aux.x = lastPositionX
 	aux.y = lastPositionY
+	aux.posicionarBarra()
 	bichos.append(aux)
 	restarPosicion()
 
@@ -148,7 +164,7 @@ def incrementarDificultad():
 def empezarJuego():
 	incrementarDificultad()
 	pilas.tareas.siempre(1, loopControl) 
-	pilas.tareas.siempre(30, incrementarDificultad) 
+	pilas.tareas.siempre(5, incrementarDificultad) 
 
 btnStart.conectar(empezarJuego)
 pilas.ejecutar()
