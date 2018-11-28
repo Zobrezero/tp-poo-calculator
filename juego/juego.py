@@ -9,13 +9,14 @@ pilas = pilasengine.iniciar()
 import pilasengine
 
 class ADNBicho(object):
-	__vida = 100
+	__vida = 1000
 
 	__descansado   = 50
 	__entretencion = 50
 	__satisfecho   = 50
 
 	__suma_vida = 25
+	__descenso_vida = 0
 
 	__multiplicador_vida         = 1
 	__multiplicador_descansado   = 1
@@ -25,10 +26,10 @@ class ADNBicho(object):
 	__nivel = 0
 
 	def __init__(self):
-		self.__vida = 0
+		return None
 
-	def __setVida(self, vida):
-		self.__vida = self.vida + vida
+	def setVida(self,vid):
+		self.__descenso_vida = vid
 
 	def __setSatisfecho(self):
 		return None
@@ -45,7 +46,10 @@ class ADNBicho(object):
 	def __setMultiplicador(self):
 		return None
 
+
 	def vivir(self):
+		print (self.__descenso_vida)
+		self.__vida = self.__vida - self.__descenso_vida
 		return True if self.__vida > 0  else False
 
 	def getVida(self):
@@ -71,6 +75,7 @@ class BichoRojo(pilasengine.actores.Actor, ADNBicho):
 		self.__barra.progreso = self.getVida()
 
 	def iniciar(self):
+		self.setVida(22)
 		self.imagen = "Bicho1.png"
 		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
 
@@ -86,6 +91,7 @@ class BichoVerde(pilasengine.actores.Actor, ADNBicho):
 		self.__barra.progreso = self.getVida()
 
 	def iniciar(self):
+		self.setVida(16)
 		self.imagen = "Bicho2.png"
 		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
 
@@ -102,6 +108,7 @@ class BichoAzul(pilasengine.actores.Actor, ADNBicho):
 
 	def iniciar(self):
 		self.imagen = "Bicho3.png"
+		self.setVida(12)
 		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
 
 	def posicionarBarra(self):
@@ -121,6 +128,7 @@ lastPositionX = -275
 lastPositionY = 200
 
 def finDelJuego():
+	print("fin del juego")
 	pilas.tareas.eliminar_todas()
 
 def restarPosicion():
@@ -147,12 +155,14 @@ def generarBicho():
 	aux.y = lastPositionY
 	aux.posicionarBarra()
 	bichos.append(aux)
+	pilas.avisar("Hola, esto es un mensaje.")
 	restarPosicion()
 
 def loopControl():
 	if (len(bichos)):
 		for i in range(len(bichos)):
 			aux2 = bichos[i]
+			aux2.vivir()
 			if (aux2.vivir() != True):
 				finDelJuego()
 
