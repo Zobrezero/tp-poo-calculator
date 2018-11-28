@@ -1,35 +1,19 @@
 import pilasengine
-#from   Bichos import *
 import random
 
-# Global vars
 pilas = pilasengine.iniciar()
 
-
-import pilasengine
-
 class ADNBicho(object):
-	__vida = 1000
+	__vida = 100
 
 	__descansado   = 50
 	__entretencion = 50
 	__satisfecho   = 50
 
-	__suma_vida = 25
+	__aumento_vida = 25
 	__descenso_vida = 0
 
-	__multiplicador_vida         = 1
-	__multiplicador_descansado   = 1
-	__multiplicador_entretencion = 1
-	__multiplicador_satisfecho   = 1
-
 	__nivel = 0
-
-	def __init__(self):
-		return None
-
-	def setVida(self,vid):
-		self.__descenso_vida = vid
 
 	def __setSatisfecho(self):
 		return None
@@ -46,19 +30,23 @@ class ADNBicho(object):
 	def __setMultiplicador(self):
 		return None
 
+	def setDescensoVida(self, vid):
+		self.__descenso_vida = vid
+
+	def setAumentoVida(self, vid):
+		self.__aumento_vida = vid
 
 	def vivir(self):
-		print (self.__descenso_vida)
 		self.__vida = self.__vida - self.__descenso_vida
 		return True if self.__vida > 0  else False
+
+	def aumentarVida(self):
+		self.__vida = self.__vida + self.__aumento_vida
 
 	def getVida(self):
 		return self.__vida
 
 	def isVivo(self):
-		return None
-
-	def tomarPosicion(self):
 		return None
 
 	def comer(self):
@@ -73,69 +61,102 @@ class ADNBicho(object):
 class BichoRojo(pilasengine.actores.Actor, ADNBicho):
 	def vivir(self):
 		self.__barra.progreso = self.getVida()
+		return ADNBicho.vivir(self)
 
 	def iniciar(self):
-		self.setVida(22)
+		self.setDescensoVida(7)
+		self.setDescensoVida(10)
 		self.imagen = "Bicho1.png"
 		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
+		self.set_cuando_hace_click(self.meTocaron)
 
 	def posicionarBarra(self):
 		self.__barra.x = self.x
 		self.__barra.y = self.y - 50
 
-	def saludar(self):
-		print("Hola wachin")
+	def matar(self):
+		self.__barra.eliminar()
+		self.eliminar()
+
+	def meTocaron(self):
+		self.aumentarVida()
 
 class BichoVerde(pilasengine.actores.Actor, ADNBicho):
 	def vivir(self):
 		self.__barra.progreso = self.getVida()
+		return ADNBicho.vivir(self)
 
 	def iniciar(self):
-		self.setVida(16)
+		self.setDescensoVida(1)
+		self.setDescensoVida(2)
 		self.imagen = "Bicho2.png"
 		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
+		self.set_cuando_hace_click(self.meTocaron)
 
 	def posicionarBarra(self):
 		self.__barra.x = self.x
 		self.__barra.y = self.y - 50
 
-	def saludar(self):
-		print("Hola wachin")
+	def matar(self):
+		self.__barra.eliminar()
+		self.eliminar()
+
+	def meTocaron(self):
+		self.aumentarVida()
 
 class BichoAzul(pilasengine.actores.Actor, ADNBicho):
 	def vivir(self):
 		self.__barra.progreso = self.getVida()
+		return ADNBicho.vivir(self)
 
 	def iniciar(self):
+		self.setDescensoVida(3)
+		self.setDescensoVida(5)
 		self.imagen = "Bicho3.png"
-		self.setVida(12)
 		self.__barra = pilas.actores.Energia(self.getVida() , ancho=90, alto=10)
+		self.set_cuando_hace_click(self.meTocaron)
 
 	def posicionarBarra(self):
 		self.__barra.x = self.x
 		self.__barra.y = self.y - 50
 
-	def saludar(self):
-		print("Hola wachin")
+	def matar(self):
+		self.__barra.eliminar()
+		self.eliminar()
+
+	def meTocaron(self):
+		self.aumentarVida()
 
 bichos = []
 
 btnStart   = pilas.interfaz.Boton(texto="Empezar el juego")
-btnStart.x = -240
+btnStart.x = 240
 btnStart.y = -230
 
 lastPositionX = -275
 lastPositionY = 200
 
+
+def loopMatarBichos():
+	global lastPositionX
+	global lastPositionY
+	lastPositionX = -275
+	lastPositionY = 200
+	if (len(bichos)):
+		for i in range(len(bichos)):
+			aux2 = bichos[i]
+			aux2.matar()
+
 def finDelJuego():
-	print("fin del juego")
 	pilas.tareas.eliminar_todas()
+	loopMatarBichos()
+	pilas.avisar("Fin del juego!")
+	btnStart.activar()
 
 def restarPosicion():
 	global lastPositionX
 	global lastPositionY
 	lastPositionX = lastPositionX + 100
-	#lastPositionY = lastPositionY - 50
 	if (len(bichos) % 6 == 0):
 		lastPositionY = lastPositionY -100
 		lastPositionX = -285
@@ -155,7 +176,6 @@ def generarBicho():
 	aux.y = lastPositionY
 	aux.posicionarBarra()
 	bichos.append(aux)
-	pilas.avisar("Hola, esto es un mensaje.")
 	restarPosicion()
 
 def loopControl():
@@ -172,9 +192,11 @@ def incrementarDificultad():
 	generarBicho()
 
 def empezarJuego():
+	btnStart.desactivar()
 	incrementarDificultad()
-	pilas.tareas.siempre(1, loopControl) 
-	pilas.tareas.siempre(5, incrementarDificultad) 
+	pilas.tareas.siempre(0.5, loopControl) 
+	pilas.tareas.siempre(20, incrementarDificultad) 
 
 btnStart.conectar(empezarJuego)
+
 pilas.ejecutar()
